@@ -1,7 +1,48 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .search {
     display: flex;
     flex-direction: column;
-    width: 150px;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.release-year-label-containter {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.search-input {
+    border-radius: 5px;
+    height: 35px;
+    text-align: center;
+    font-size: 16px;
+}
+
+h1 {
+    background-color: rgba(255, 0, 0, 0.678);
+    padding: 10px;
+    border-radius: 10px;
+    width: 300px;
+    height: 55px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0px;
 }
 
 .hidden {
@@ -14,6 +55,92 @@
 
 .release-year-container {
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
+    width: 200px;
+}
+
+.tmdb-logo {
+    height: 25px;
+}
+
+.instructions-container {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+.results-area {
+ width: 320px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.not-available {
+    color: white;
+    font-size: 24px;
+}
+
+.js-new-search-container {
+    display: flex;
+    align-items: center;
+}
+
+.stream-service {
+    width: 100px;
+    background-color: white;
+}
+
+.stream-service:hover {
+    background-color: gray;
+}
+
+.tmdb-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.tmdb-disclosure {
+    font-size: 10px;
+    width: 60%;
+    text-align: left;
+}
+
+.stream-button, .begin-button, .search-button, .new-search-button { 
+    background-color: rgba(255, 0, 0, 0.678);
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    width: 300px;
+    height: 55px;
+    border: none;
+    color: white;
+    font-size: 24px;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+}
+
+.stream-button:hover {
+    background-color: rgba(238, 84, 84, 0.678);
+}
+
+.begin-button:hover {
+    background-color: rgba(238, 84, 84, 0.678);
+}
+
+.search-button:hover {
+    background-color: rgba(238, 84, 84, 0.678);
+}
+
+.new-search-button:hover {
+    background-color: rgba(238, 84, 84, 0.678);
 }

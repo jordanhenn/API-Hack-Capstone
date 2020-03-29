@@ -92,11 +92,18 @@ function displayMovie(responseJson) {
         $('.js-results').append(
             `<li>
             <h3 class="movieTitle">${responseJson.results[randomMovie].title}</h3>
-            <p class="releaseYear">${responseJson.results[randomMovie].release_date}</p>
-            <p class="overview hide js-hide">${responseJson.results[randomMovie].overview}</p>`
+            <img class="moviePoster" src="http://image.tmdb.org/t/p/w185/${responseJson.results[randomMovie].poster_path}">
+            <p class="js-overview">${responseJson.results[randomMovie].overview}</p>
+            <button type="button" class="stream-button js-show-streams">Where's it streaming?</button>`
         );
+        $('.js-new-search-container').append(`
+        <button type="button" class="new-search-button js-new-search">New Search</button>`);
     const randomMovieID = responseJson.results[randomMovie].id;
-    getStream(randomMovieID);
+    $('body').on("click", ".js-show-streams", event => {
+        $('.js-overview').hide();
+        $('.js-show-streams').hide();
+        getStream(randomMovieID);
+    });
 }
 
 function getStream(randomMovieID) {
@@ -128,18 +135,21 @@ function displayStreams(responseJson) {
     if (responseJson.collection.locations.length === 0){
         $('.js-streaming').append(
             `<li>
-            <p>Not available for streaming.</p>
+            <p class="not-available">This title is not currently available for streaming.</p>
             </li>`
         ); 
     } else {
         for (let i = 0; i < responseJson.collection.locations.length; i++) {
             $('.js-streaming').append(
                 `<li>
-                <h3 class="streamLink"><a target="_blank" href="${responseJson.collection.locations[i].url}">${responseJson.collection.locations[i].display_name}</a></h3>
+                <a target="_blank" href="${responseJson.collection.locations[i].url}"><img class="stream-service" src="${responseJson.collection.locations[i].icon}" alt="A link to ${responseJson.collection.locations[i].display_name}"></a>
                 </li>`
             );
         }
-}
+    }
+    $('js-streaming').append(`
+    <button type="button" class="new-search-button js-new-search">New Search</button>`
+    );
 }
 
 function fetchID(famousPerson, minReleaseYear,maxReleaseYear){
@@ -167,11 +177,31 @@ function fetchID(famousPerson, minReleaseYear,maxReleaseYear){
         });
 }
 
+function showSearch(){
+    $('.js-close-instructions').on("click", event => {
+        $('.instructions-container').hide();
+        $('.js-search').removeClass("hidden");
+    });
+}
+
+function newSearch(){
+    $('body').on("click",".js-new-search", event => {
+        $('.js-streaming-area').hide();
+        $('.js-results-area').hide();
+        $('.js-new-search-container').empty();
+        $('.js-error-message').val(''); 
+        $('.js-search').show();
+    });
+}
+
 function watchForm(){
 $('.js-search').submit(event => {
     event.preventDefault();
     $('.js-results-area').addClass('hidden');
     $('.js-streaming-area').addClass('hidden');
+    $('.js-streaming-area').show();
+    $('.js-results-area').show();
+    $('.js-search').hide();
     $('.js-results').empty();
     $('.js-streaming').empty();
     $('.js-error-message').text('');
@@ -182,6 +212,6 @@ $('.js-search').submit(event => {
 });
 }
 
-
 $(watchForm);
-
+$(showSearch);
+$(newSearch);

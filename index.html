@@ -3,21 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Can't Decide</title>
+    <title>CantDecide</title>
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <h1>Can't Decide</h1>
-    <form class="search js-search">
-        <label for="number">Release Year</label>
-        <div class="release-year-container">
-            <input type="number" placeholder="1990" id="number" min="1900" max="2020" class="js-min-year" required>
-            <p>to</p>
-            <input type="number" placeholder="2020" id="number" min="1900" max="2020" class="js-max-year" required>
+    <h1>CantDecide</h1>
+    <div class="instructions-container">
+        <p class="app-info">This app uses the The Movie Database and Utelly APIs to provide you with a random movie recommendation.</p>
+        <p class="app info">Hit the button below to begin.</p>
+        <button type="button" class="begin-button js-close-instructions">Begin</button>
+        <div class="tmdb-container">
+            <img class ="tmdb-logo" src="./tmdb_logo.svg" alt="The Movie Databse logo."/>
+            <p class="tmdb-disclosure">This product uses the TMDb API but is not endorsed or certified by TMDb.</p>
         </div>
-        <label for="name">Any actor you're interested in watching?</label>
-        <input type="text" placeholder="Tom Cruise" id="name" class="js-name" required>
-        <input type="submit" value="Search">
+    </div>
+    <form class="search js-search hidden">
+        <div class="release-year-label-containter">
+            <label for="number">Set Release Years:</label>
+            <div class="release-year-container">
+                <input type="number" placeholder="1990" id="number" min="1900" max="2020" class="search-input js-min-year" required>
+                <p>to</p>
+                <input type="number" placeholder="2020" id="number" min="1900" max="2020" class="search-input js-max-year" required>
+            </div>
+        </div>
+        <label for="name">Name an actor:</label>
+        <input type="text" placeholder="Tom Cruise" id="name" class="search-input js-name" required>
+        <input class="search-button" type="submit" value="Search">
     </form>
     <h3 class="js-error-message"></h3>
     <section class="results-area hidden js-results-area">
@@ -28,6 +39,8 @@
         <ul class="js-streaming"> 
         </ul>
     </section>
+    <div class="js-new-search-container">
+    </div>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="script.js"></script>
 </body>
