@@ -96,7 +96,7 @@ h3 {
     font-size: 24px;
 }
 
-.js-new-search-container {
+.new-search {
     display: flex;
     align-items: center;
 }
@@ -131,7 +131,6 @@ h3 {
 
 .stream-button, .begin-button, .search-button, .new-search-button { 
     background-color: rgba(255, 0, 0, 0.678);
-    margin-top: 20px;
     padding: 10px;
     border-radius: 10px;
     width: 300px;
@@ -142,6 +141,10 @@ h3 {
     display: flex;
     align-self: center;
     justify-content: center;
+}
+
+.search-button {
+    margin-top: 20px;
 }
 
 .stream-button:hover {

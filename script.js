@@ -232,7 +232,7 @@ $('.js-search').submit(event => {
     $('.js-search').hide();
     $('.js-error-message').text('');
     const minReleaseYear = $('.js-min-year').val() + '-01-01';
-    const maxReleaseYear = $('.js-max-year').val() + '-12-31';
+    const maxReleaseYear = $('.js-max-year').val() + '-04-30';
     const famousPerson = $('.js-name').val();
     fetchID(famousPerson,minReleaseYear,maxReleaseYear);
 });
