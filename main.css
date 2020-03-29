@@ -68,7 +68,12 @@ h1 {
 .instructions-container {
     display: flex;
     flex-direction: column;
-    width: 40%;
+    align-items: center;
+    width: 80%;
+}
+
+.app-info {
+    width: 300px;
 }
 
 .results-area {
@@ -120,14 +125,14 @@ h3 {
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    width: 300px;
+    width: 250px;
     margin-left: auto;
     margin-right: auto;
 }
 .tmdb-disclosure {
     font-size: 10px;
-    width: 60%;
     text-align: left;
+    margin-left: 10px;
 }
 
 .stream-button, .begin-button, .search-button, .new-search-button { 
