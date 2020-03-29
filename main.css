@@ -78,12 +78,17 @@ h1 {
 ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 li {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+h3 {
+    margin-top: 0;
 }
 
 .not-available {
@@ -99,6 +104,10 @@ li {
 .stream-service {
     width: 100px;
     background-color: white;
+}
+
+.streaming-area {
+    padding-top: 20px;
 }
 
 .stream-service:hover {
