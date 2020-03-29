@@ -100,6 +100,7 @@ function displayMovie(responseJson) {
         <button type="button" class="new-search-button js-new-search">New Search</button>`);
     const randomMovieID = responseJson.results[randomMovie].id;
     $('body').on("click", ".js-show-streams", event => {
+        $('.js-streaming').empty();
         $('.js-overview').hide();
         $('.js-show-streams').hide();
         getStream(randomMovieID);
@@ -107,6 +108,7 @@ function displayMovie(responseJson) {
 }
 
 function getStream(randomMovieID) {
+    $('.js-streaming').empty();
     const params = {
         source_id: randomMovieID,
         source: "tmdb",
@@ -131,6 +133,7 @@ function getStream(randomMovieID) {
 
 function displayStreams(responseJson) {
     console.log(responseJson);
+    $('.js-streaming').empty();
     $('.js-streaming-area').removeClass('hidden');
     if (responseJson.collection.locations.length === 0){
         $('.js-streaming').append(
@@ -186,6 +189,8 @@ function showSearch(){
 
 function newSearch(){
     $('body').on("click",".js-new-search", event => {
+        $('.js-results').empty();
+        $('.js-streaming').empty();
         $('.js-streaming-area').hide();
         $('.js-results-area').hide();
         $('.js-new-search-container').empty();
@@ -199,11 +204,11 @@ $('.js-search').submit(event => {
     event.preventDefault();
     $('.js-results-area').addClass('hidden');
     $('.js-streaming-area').addClass('hidden');
+    $('.js-results').empty();
+    $('.js-streaming').empty();
     $('.js-streaming-area').show();
     $('.js-results-area').show();
     $('.js-search').hide();
-    $('.js-results').empty();
-    $('.js-streaming').empty();
     $('.js-error-message').text('');
     const minReleaseYear = $('.js-min-year').val() + '-01-01';
     const maxReleaseYear = $('.js-max-year').val() + '-12-31';
