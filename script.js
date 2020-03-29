@@ -89,15 +89,28 @@ function displayMovie(responseJson) {
     console.log(responseJson);
     $('.js-results-area').removeClass('hidden');
     const randomMovie = Math.floor(Math.random() * responseJson.results.length);
+    if(responseJson.results[randomMovie].poster_path == null) {
+        $('.js-results').append(
+            `<li>
+            <h3 class="movieTitle">${responseJson.results[randomMovie].title}</h3>
+            <p class="js-overview">${responseJson.results[randomMovie].overview}</p>
+            <button type="button" class="stream-button js-show-streams">Where's it streaming?</button>
+            </li>`
+        );
+        $('.js-new-search-container').append(`
+        <button type="button" class="new-search-button js-new-search">New Search</button>`);
+        } else {
         $('.js-results').append(
             `<li>
             <h3 class="movieTitle">${responseJson.results[randomMovie].title}</h3>
             <img class="moviePoster" src="http://image.tmdb.org/t/p/w185/${responseJson.results[randomMovie].poster_path}">
             <p class="js-overview">${responseJson.results[randomMovie].overview}</p>
-            <button type="button" class="stream-button js-show-streams">Where's it streaming?</button>`
+            <button type="button" class="stream-button js-show-streams">Where's it streaming?</button>
+            </li>`
         );
         $('.js-new-search-container').append(`
         <button type="button" class="new-search-button js-new-search">New Search</button>`);
+        }
     const randomMovieID = responseJson.results[randomMovie].id;
     $('body').on("click", ".js-show-streams", event => {
         $('.js-streaming').empty();
