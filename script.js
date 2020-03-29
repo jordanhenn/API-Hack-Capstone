@@ -46,6 +46,8 @@ function fetchPageTotal(minReleaseYear,maxReleaseYear,famousPersonID){
         })
         .catch(err => {
             $('.js-error-message').text(`Error: ${err.message}`);
+            $('.js-new-search-container').append(`
+        <button type="button" class="new-search-button js-new-search">New Search</button>`);
     });
 }
 
@@ -81,6 +83,8 @@ function getMovie(minReleaseYear,maxReleaseYear,famousPersonID,pageTotal){
         .then(responseJson => displayMovie(responseJson))
         .catch(err => {
             $('.js-error-message').text(`Error: ${err.message}`);
+            $('.js-new-search-container').append(`
+        <button type="button" class="new-search-button js-new-search">New Search</button>`);
     });
 }
 
@@ -141,6 +145,8 @@ function getStream(randomMovieID) {
         .then(responseJson => displayStreams(responseJson))
         .catch(err => {
             $('.js-error-message').text(`Error: ${err.message}`);
+            $('.js-new-search-container').append(`
+        <button type="button" class="new-search-button js-new-search">New Search</button>`);
     });
 }
 
@@ -190,6 +196,8 @@ function fetchID(famousPerson, minReleaseYear,maxReleaseYear){
         })
         .catch(err => {
             $('.js-error-message').text(`Error: ${err.message}`)
+            $('.js-new-search-container').append(`
+        <button type="button" class="new-search-button js-new-search">New Search</button>`);
         });
 }
 
@@ -207,7 +215,7 @@ function newSearch(){
         $('.js-streaming-area').hide();
         $('.js-results-area').hide();
         $('.js-new-search-container').empty();
-        $('.js-error-message').val(''); 
+        $('.js-error-message').text(''); 
         $('.js-search').show();
     });
 }
