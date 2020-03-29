@@ -231,11 +231,25 @@ $('.js-search').submit(event => {
     $('.js-results-area').show();
     $('.js-search').hide();
     $('.js-error-message').text('');
+    const maxYear = $('.js-max-year').val();
     const minReleaseYear = $('.js-min-year').val() + '-01-01';
-    const maxReleaseYear = $('.js-max-year').val() + '-04-30';
+    const maxReleaseYear = getMaxReleaseYear(maxYear);
     const famousPerson = $('.js-name').val();
     fetchID(famousPerson,minReleaseYear,maxReleaseYear);
 });
+}
+
+function getMaxReleaseYear(maxYear) {
+    if (maxYear == 2020) {
+        const today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const maxReleaseYear = maxYear + '-' + mm + '-' + dd;
+        return maxReleaseYear;
+    } else {
+        const maxReleaseYear = maxYear + '-12-31';
+        return maxReleaseYear;
+    }
 }
 
 $(watchForm);
