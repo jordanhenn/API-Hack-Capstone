@@ -203,8 +203,11 @@ function fetchID(famousPerson, minReleaseYear,maxReleaseYear){
 
 function showSearch(){
     $('.js-close-instructions').on("click", event => {
-        $('.instructions-container').hide();
-        $('.js-search').removeClass("hidden");
+        $('.instructions-container').fadeOut({
+            complete: function() {
+              $('.js-search').removeClass("hidden").hide().fadeIn("slow");
+            }}
+          );
     });
 }
 
