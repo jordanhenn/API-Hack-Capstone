@@ -21,7 +21,97 @@ function formatQueryParams(params){
     return queryItems.join('&');
 }
 
-function fetchPageTotal(minReleaseYear,maxReleaseYear,famousPersonID){
+function fetchPageTotal(minReleaseYear,maxReleaseYear,famousPersonID,genre){
+    const params = {
+        'primary_release_date.gte': minReleaseYear,
+        'primary_release_date.lte': maxReleaseYear,
+        with_people: famousPersonID,
+        with_genres: genre,
+        include_adult: false,
+        include_video: false,
+        api_key: tmdb_ApiKey
+    };
+    const queryString = formatQueryParams(params);
+    const url = discoverURL + '?' + queryString;
+    console.log(url);
+    fetch(url)
+        .then(response => {
+            if (response.ok) {
+            return response.json();
+        }
+        throw new Error(response.statusText);
+        })
+        .then(responseJson => {
+            const pageTotal = responseJson.total_pages; 
+            getMovie(minReleaseYear,maxReleaseYear,famousPersonID,pageTotal,genre)  
+        })
+        .catch(err => {
+            $('.js-error-message').text(`Error: ${err.message}`);
+            $('.js-new-search-container').append(`
+        <button type="button" class="new-search-button js-new-search">New Search</button>`);
+    });
+}
+
+function fetchPageTotalNoName(minReleaseYear,maxReleaseYear,genre){
+    const params = {
+        'primary_release_date.gte': minReleaseYear,
+        'primary_release_date.lte': maxReleaseYear,
+        with_genres: genre,
+        include_adult: false,
+        include_video: false,
+        api_key: tmdb_ApiKey
+    };
+    const queryString = formatQueryParams(params);
+    const url = discoverURL + '?' + queryString;
+    console.log(url);
+    fetch(url)
+        .then(response => {
+            if (response.ok) {
+            return response.json();
+        }
+        throw new Error(response.statusText);
+        })
+        .then(responseJson => {
+            const pageTotal = responseJson.total_pages; 
+            getMovieNoName(minReleaseYear,maxReleaseYear,pageTotal,genre)  
+        })
+        .catch(err => {
+            $('.js-error-message').text(`Error: ${err.message}`);
+            $('.js-new-search-container').append(`
+        <button type="button" class="new-search-button js-new-search">New Search</button>`);
+    });
+}
+
+function fetchPageTotalNoNameNoGenre(minReleaseYear,maxReleaseYear){
+    const params = {
+        'primary_release_date.gte': minReleaseYear,
+        'primary_release_date.lte': maxReleaseYear,
+        include_adult: false,
+        include_video: false,
+        api_key: tmdb_ApiKey
+    };
+    const queryString = formatQueryParams(params);
+    const url = discoverURL + '?' + queryString;
+    console.log(url);
+    fetch(url)
+        .then(response => {
+            if (response.ok) {
+            return response.json();
+        }
+        throw new Error(response.statusText);
+        })
+        .then(responseJson => {
+            const pageTotal = responseJson.total_pages; 
+            getMovieNoNameNoGenre(minReleaseYear,maxReleaseYear,pageTotal)  
+        })
+        .catch(err => {
+            $('.js-error-message').text(`Error: ${err.message}`);
+            $('.js-new-search-container').append(`
+        <button type="button" class="new-search-button js-new-search">New Search</button>`);
+    });
+}
+
+function fetchPageTotalNoGenre(minReleaseYear,maxReleaseYear,famousPersonID){
     const params = {
         'primary_release_date.gte': minReleaseYear,
         'primary_release_date.lte': maxReleaseYear,
@@ -42,7 +132,7 @@ function fetchPageTotal(minReleaseYear,maxReleaseYear,famousPersonID){
         })
         .then(responseJson => {
             const pageTotal = responseJson.total_pages; 
-            getMovie(minReleaseYear,maxReleaseYear,famousPersonID,pageTotal)  
+            getMovieNoGenre(minReleaseYear,maxReleaseYear,famousPersonID,pageTotal)  
         })
         .catch(err => {
             $('.js-error-message').text(`Error: ${err.message}`);
@@ -60,7 +150,91 @@ function getPageNumber(pageTotal) {
         }
 }
 
-function getMovie(minReleaseYear,maxReleaseYear,famousPersonID,pageTotal){
+function getMovie(minReleaseYear,maxReleaseYear,famousPersonID,pageTotal,genre){
+    const params = {
+        'primary_release_date.gte': minReleaseYear,
+        'primary_release_date.lte': maxReleaseYear,
+        with_people: famousPersonID,
+        page: getPageNumber(pageTotal),
+        with_genres: genre,
+        include_adult: false,
+        include_video: false,
+        api_key: tmdb_ApiKey
+    };
+    const queryString = formatQueryParams(params);
+    const url = discoverURL + '?' + queryString;
+    console.log(url);
+    fetch(url)
+        .then(response => {
+            if (response.ok) {
+            return response.json();
+        }
+        throw new Error(response.statusText);
+        })
+        .then(responseJson => displayMovie(responseJson))
+        .catch(err => {
+            $('.js-error-message').text(`Error: ${err.message}`);
+            $('.js-new-search-container').append(`
+        <button type="button" class="new-search-button js-new-search">New Search</button>`);
+    });
+}
+
+function getMovieNoName(minReleaseYear,maxReleaseYear,pageTotal,genre){
+    const params = {
+        'primary_release_date.gte': minReleaseYear,
+        'primary_release_date.lte': maxReleaseYear,
+        page: getPageNumber(pageTotal),
+        with_genres: genre,
+        include_adult: false,
+        include_video: false,
+        api_key: tmdb_ApiKey
+    };
+    const queryString = formatQueryParams(params);
+    const url = discoverURL + '?' + queryString;
+    console.log(url);
+    fetch(url)
+        .then(response => {
+            if (response.ok) {
+            return response.json();
+        }
+        throw new Error(response.statusText);
+        })
+        .then(responseJson => displayMovie(responseJson))
+        .catch(err => {
+            $('.js-error-message').text(`Error: ${err.message}`);
+            $('.js-new-search-container').append(`
+        <button type="button" class="new-search-button js-new-search">New Search</button>`);
+    });
+}
+
+function getMovieNoNameNoGenre(minReleaseYear,maxReleaseYear,pageTotal){
+    const params = {
+        'primary_release_date.gte': minReleaseYear,
+        'primary_release_date.lte': maxReleaseYear,
+        page: getPageNumber(pageTotal),
+        include_adult: false,
+        include_video: false,
+        api_key: tmdb_ApiKey
+    };
+    const queryString = formatQueryParams(params);
+    const url = discoverURL + '?' + queryString;
+    console.log(url);
+    fetch(url)
+        .then(response => {
+            if (response.ok) {
+            return response.json();
+        }
+        throw new Error(response.statusText);
+        })
+        .then(responseJson => displayMovie(responseJson))
+        .catch(err => {
+            $('.js-error-message').text(`Error: ${err.message}`);
+            $('.js-new-search-container').append(`
+        <button type="button" class="new-search-button js-new-search">New Search</button>`);
+    });
+}
+
+function getMovieNoGenre(minReleaseYear,maxReleaseYear,famousPersonID,pageTotal){
     const params = {
         'primary_release_date.gte': minReleaseYear,
         'primary_release_date.lte': maxReleaseYear,
@@ -91,37 +265,57 @@ function getMovie(minReleaseYear,maxReleaseYear,famousPersonID,pageTotal){
 
 function displayMovie(responseJson) {
     console.log(responseJson);
-    $('.js-results-area').removeClass('hidden');
-    const randomMovie = Math.floor(Math.random() * responseJson.results.length);
-    if(responseJson.results[randomMovie].poster_path == null) {
+    if (responseJson.total_results == 0){
+        $('.js-results-area').removeClass('hidden');
         $('.js-results').append(
             `<li>
-            <h3 class="movieTitle">${responseJson.results[randomMovie].title}</h3>
-            <p class="js-overview">${responseJson.results[randomMovie].overview}</p>
-            <button type="button" class="stream-button js-show-streams">Where's it streaming?</button>
-            </li>`
-        );
+            <p class="not-available">No movie found.</p>
+            <p class="not-available">Please refine your search.</p>
+            </li>`);
         $('.js-new-search-container').append(`
-        <button type="button" class="new-search-button js-new-search">New Search</button>`);
-        } else {
-        $('.js-results').append(
-            `<li>
-            <h3 class="movieTitle">${responseJson.results[randomMovie].title}</h3>
-            <img class="moviePoster" src="http://image.tmdb.org/t/p/w185/${responseJson.results[randomMovie].poster_path}">
-            <p class="js-overview">${responseJson.results[randomMovie].overview}</p>
-            <button type="button" class="stream-button js-show-streams">Where's it streaming?</button>
-            </li>`
-        );
-        $('.js-new-search-container').append(`
-        <button type="button" class="new-search-button js-new-search">New Search</button>`);
-        }
-    const randomMovieID = responseJson.results[randomMovie].id;
-    $('body').on("click", ".js-show-streams", event => {
-        $('.js-streaming').empty();
-        $('.js-overview').hide();
-        $('.js-show-streams').hide();
-        getStream(randomMovieID);
-    });
+            <button type="button" class="new-search-button js-new-search">New Search</button>`);
+    } else {
+        $('.js-results-area').removeClass('hidden');
+        const randomMovie = Math.floor(Math.random() * responseJson.results.length);
+            if(responseJson.results[randomMovie].poster_path == null) {
+                const movieYear = responseJson.results[randomMovie].release_date.slice(0,4);
+                $('.js-results').append(
+                    `<li>
+                    <h3 class="movieTitle">${responseJson.results[randomMovie].title} (${movieYear})</h3>
+                    <p class="js-overview">${responseJson.results[randomMovie].overview}</p>
+                    <button type="button" class="stream-button js-show-streams">Where's it streaming?</button>
+                    </li>`
+                );
+                $('.js-new-search-container').append(`
+                <button type="button" class="new-search-button js-new-search">New Search</button>`);
+                const randomMovieID = responseJson.results[randomMovie].id;
+                $('body').on("click", ".js-show-streams", event => {
+                    $('.js-streaming').empty();
+                    $('.js-overview').hide();
+                    $('.js-show-streams').hide();
+                    getStream(randomMovieID);
+                });
+            } else {
+                const movieYear = responseJson.results[randomMovie].release_date.slice(0,4);
+                $('.js-results').append(
+                    `<li>
+                    <h3 class="movieTitle">${responseJson.results[randomMovie].title} (${movieYear})</h3>
+                    <img class="moviePoster" src="http://image.tmdb.org/t/p/w185/${responseJson.results[randomMovie].poster_path}">
+                    <p class="js-overview">${responseJson.results[randomMovie].overview}</p>
+                    <button type="button" class="stream-button js-show-streams">Where's it streaming?</button>
+                    </li>`
+                );
+                $('.js-new-search-container').append(`
+                <button type="button" class="new-search-button js-new-search">New Search</button>`);
+                const randomMovieID = responseJson.results[randomMovie].id;
+                $('body').on("click", ".js-show-streams", event => {
+                    $('.js-streaming').empty();
+                    $('.js-overview').hide();
+                    $('.js-show-streams').hide();
+                    getStream(randomMovieID);
+                });
+            }
+    }
 }
 
 function getStream(randomMovieID) {
@@ -174,11 +368,11 @@ function displayStreams(responseJson) {
     );
 }
 
-function fetchID(famousPerson, minReleaseYear,maxReleaseYear){
-    //fetches id for name on movie database
+function fetchID(famousPerson,minReleaseYear,maxReleaseYear,genre){
     const params = {
         query: famousPerson,
         api_key: tmdb_ApiKey
+        
     };
     const queryString = formatQueryParams(params);
     const url = peopleURL + '?' + queryString;
@@ -192,7 +386,34 @@ function fetchID(famousPerson, minReleaseYear,maxReleaseYear){
         })
         .then(responseJson => {
             const famousPersonID = responseJson.results[0].id;
-            fetchPageTotal(minReleaseYear, maxReleaseYear,famousPersonID);
+            fetchPageTotal(minReleaseYear, maxReleaseYear,famousPersonID, genre);
+        })
+        .catch(err => {
+            $('.js-error-message').text(`Error: ${err.message}`)
+            $('.js-new-search-container').append(`
+        <button type="button" class="new-search-button js-new-search">New Search</button>`);
+        });
+}
+
+function fetchIDNoGenre(famousPerson,minReleaseYear,maxReleaseYear){
+    const params = {
+        query: famousPerson,
+        api_key: tmdb_ApiKey
+        
+    };
+    const queryString = formatQueryParams(params);
+    const url = peopleURL + '?' + queryString;
+    console.log(url);
+    fetch(url)
+        .then(response => {
+            if (response.ok) {
+            return response.json();
+        }
+        throw new Error(response.statusText);
+        })
+        .then(responseJson => {
+            const famousPersonID = responseJson.results[0].id;
+            fetchPageTotalNoGenre(minReleaseYear, maxReleaseYear,famousPersonID);
         })
         .catch(err => {
             $('.js-error-message').text(`Error: ${err.message}`)
@@ -224,34 +445,63 @@ function newSearch(){
 }
 
 function watchForm(){
-$('.js-search').submit(event => {
-    event.preventDefault();
-    $('.js-results-area').addClass('hidden');
-    $('.js-streaming-area').addClass('hidden');
-    $('.js-results').empty();
-    $('.js-streaming').empty();
-    $('.js-streaming-area').show();
-    $('.js-results-area').show();
-    $('.js-search').hide();
-    $('.js-error-message').text('');
-    const maxYear = $('.js-max-year').val();
-    const minReleaseYear = $('.js-min-year').val() + '-01-01';
-    const maxReleaseYear = getMaxReleaseYear(maxYear);
-    const famousPerson = $('.js-name').val();
-    fetchID(famousPerson,minReleaseYear,maxReleaseYear);
-});
+    $('.js-search').submit(event => {
+        event.preventDefault();
+        $('.js-results-area').addClass('hidden');
+        $('.js-streaming-area').addClass('hidden');
+        $('.js-results').empty();
+        $('.js-streaming').empty();
+        $('.js-streaming-area').show();
+        $('.js-results-area').show();
+        $('.js-search').hide();
+        $('.js-error-message').text('');
+        const maxYear = $('.js-max-year').val();
+        const minYear= $('.js-min-year').val();
+        const maxReleaseYear = getMaxReleaseYear(maxYear);
+        const minReleaseYear = getMinReleaseYear(minYear);
+        const famousPerson = $('.js-name').val();
+        const genre = $('.js-genre').val();
+        if (famousPerson === '' && genre !== 'All-Genres') {
+            fetchPageTotalNoName(minReleaseYear, maxReleaseYear,genre);
+        } else if (famousPerson === '' && genre === 'All-Genres') {
+            fetchPageTotalNoNameNoGenre(minReleaseYear,maxReleaseYear);
+        } else if (famousPerson !== '' && genre === 'All-Genres') {
+            fetchIDNoGenre(famousPerson,minReleaseYear,maxReleaseYear);
+        } else {
+            fetchID(famousPerson,minReleaseYear,maxReleaseYear,genre);
+        }
+    });
 }
 
 function getMaxReleaseYear(maxYear) {
-    if (maxYear == 2020) {
+    if (maxYear == '') {
         const today = new Date();
-        const dd = String(today.getDate()).padStart(2, '0');
-        const mm = String(today.getMonth() + 1).padStart(2, '0');
-        const maxReleaseYear = maxYear + '-' + mm + '-' + dd;
+            const dd = String(today.getDate()).padStart(2, '0');
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const maxReleaseYear =  '2020-' + mm + '-' + dd;
+            return maxReleaseYear;
         return maxReleaseYear;
     } else {
-        const maxReleaseYear = maxYear + '-12-31';
-        return maxReleaseYear;
+        if (maxYear == 2020) {
+            const today = new Date();
+            const dd = String(today.getDate()).padStart(2, '0');
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const maxReleaseYear = maxYear + '-' + mm + '-' + dd;
+            return maxReleaseYear;
+        } else {
+            const maxReleaseYear = maxYear + '-12-31';
+            return maxReleaseYear;
+        }
+    }
+}
+
+function getMinReleaseYear(minYear) {
+    if (minYear == '') {
+        const minReleaseYear = '1900-01-01';
+        return minReleaseYear;
+    } else {
+        const minReleaseYear = minYear + '-01-01';
+        return minReleaseYear;
     }
 }
 

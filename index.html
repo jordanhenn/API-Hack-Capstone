@@ -21,13 +21,36 @@
         <div class="release-year-label-containter">
             <label for="number">Set Release Years:</label>
             <div class="release-year-container">
-                <input type="number" placeholder="1990" id="number" min="1900" max="2020" class="search-input js-min-year" required>
+                <input type="number" placeholder="1990" id="number" min="1900" max="2020" class="search-input js-min-year">
                 <p>to</p>
-                <input type="number" placeholder="2020" id="number" min="1900" max="2020" class="search-input js-max-year" required>
+                <input type="number" placeholder="2020" id="number" min="1900" max="2020" class="search-input js-max-year">
             </div>
         </div>
         <label for="name">Name a movie person:</label>
-        <input type="text" placeholder="Tom Cruise" id="name" class="search-input js-name" required>
+        <input type="text" placeholder="Tom Cruise" id="name" class="search-input js-name">
+        <label for="genre" class="genre-label">Pick a genre:</label>
+        <select id="Genres" class="search-input js-genre">
+            <option value="All-Genres" selected>All Genres</option>
+            <option value="28">Action</option>
+            <option value="12">Adventure</option>
+            <option value="16">Animation</option>
+            <option value="35">Comedy</option>
+            <option value="80">Crime</option>
+            <option value="99">Documentary</option>
+            <option value="18">Drama</option>
+            <option value="10751">Family</option>
+            <option value="14">Fantasy</option>
+            <option value="36">Historical</option>
+            <option value="27">Horror</option>
+            <option value="10402">Music</option>
+            <option value="9648">Mystery</option>
+            <option value="10749">Romance</option>
+            <option value="878">SciFi</option>
+            <option value="10770">TV Movie</option>
+            <option value="53">Thriller</option>
+            <option value="10752">War</option>
+            <option value="37">Western</option>
+        </select>
         <button class="search-button" type="submit">Search</button>
     </form>
     <h3 class="js-error-message"></h3>
