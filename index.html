@@ -18,21 +18,25 @@
         </div>
     </div>
     <form class="search js-search hidden">
+        <p class="release-year-instruct">Set release years (if you want)</p>
         <div class="release-year-label-containter">
-            <label for="number">Set release years (if you want)</label>
+            <div class="release-year-labels">
+                <label for="number1">Min Year</label>
+                <label for="number2">Max Year</label>
+            </div>
             <div class="release-year-container">
-                <input type="number" placeholder="1990" id="number" min="1900" max="2020" class="search-input js-min-year">
+                <input type="number" placeholder="1990" id="number1" min="1900" max="2020" class="search-input js-min-year">
                 <p>to</p>
-                <input type="number" placeholder="2020" id="number" min="1900" max="2020" class="search-input js-max-year">
+                <input type="number" placeholder="2020" id="number2" min="1900" max="2020" class="search-input js-max-year">
             </div>
         </div>
         <label for="name">
-            <p class="input-label">Name a movie person</p>
-            <p class="input-label">(if you feel like it)</p>
+            <span class="input-label">Name a movie person</span>
+            <span class="input-label">(if you feel like it)</span>
         </label>
         <input type="text" placeholder="Tom Cruise" id="name" class="search-input name js-name">
         <label for="genre" class="genre-label">Pick a genre (or don't)</label>
-        <select id="Genres" class="search-input js-genre">
+        <select id="genre" class="search-input js-genre">
             <option value="All-Genres" selected>All Genres</option>
             <option value="28">Action</option>
             <option value="12">Adventure</option>

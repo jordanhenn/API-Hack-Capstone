@@ -56,6 +56,11 @@ label {
     font-size: 18px;
 }
 
+.release-year-instruct {
+    font-size: 18px;
+    margin-bottom: 0px;
+}
+
 h1 {
     display: flex;
     align-items: center;
@@ -217,16 +222,34 @@ h3 {
     padding: 1px;
 }
 
-.input-label {
-    line-height: 8px;
-}
-
 .movieTitle {
     margin-top: 5px;
 }
 
 .overview {
     margin-bottom: 20px;
+}
+
+span {
+    display: flex;
+    flex-direction: column;
+}
+
+.release-year-labels {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.release-year-instruct {
+    line-height: 8px;
+}
+
+.name {
+    margin-top: 10px;
 }
 
 @media screen and (min-width: 600px) {
