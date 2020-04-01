@@ -80,10 +80,6 @@ h1 {
     display: none;
 }
 
-.js-error-message {
-    color: red;
-}
-
 .release-year-container {
     display: flex;
     flex-direction: row;
@@ -139,9 +135,10 @@ li {
     align-items: center;
 }
 
-h2 {
+.error-message {
     margin-top: 0;
     font-size: 24px;
+    color: red;
 }
 
 .not-available {
