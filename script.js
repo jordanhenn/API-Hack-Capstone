@@ -365,9 +365,9 @@ function getStream(randomMovieID) {
 
 function displayStreams(responseJson) {
     //uses Utelly responseJson to display streaming info on page
+    $('.js-streaming').empty();
     console.log(responseJson);
     if (responseJson.collection.locations.length === 0){
-        $('.js-streaming').empty();
         $('.js-streaming').append(
             `<li>
             <p class="not-available">This title is not currently available for streaming.</p>
@@ -375,7 +375,6 @@ function displayStreams(responseJson) {
         ); 
     } else {
         for (let i = 0; i < responseJson.collection.locations.length; i++) {
-            $('.js-streaming').empty();
             $('.js-streaming').append(
                 `<li>
                 <a target="_blank" href="${responseJson.collection.locations[i].url}"><img class="stream-service" src="${responseJson.collection.locations[i].icon}" alt="A link to ${responseJson.collection.locations[i].display_name}"></a>
@@ -563,4 +562,4 @@ function getMinReleaseYear(minYear) {
 
 $(watchForm);
 $(showSearch);
-$(newSearch);
+$(newSearch); 
