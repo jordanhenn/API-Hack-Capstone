@@ -9,7 +9,7 @@
 
 @font-face {
     font-family: "Karla";
-    src: url("./Karla/Karla-Regular.ttf")
+    src: url("./Karla/Karla-Regular.ttf");
 }
 
 body {
@@ -229,7 +229,7 @@ h2 {
 }
 
 .movieTitle {
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 .overview {
