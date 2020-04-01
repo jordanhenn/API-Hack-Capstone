@@ -58,7 +58,7 @@ label {
 
 .release-year-instruct {
     font-size: 18px;
-    margin-bottom: 0px;
+    margin-bottom: -5px;
 }
 
 h1 {
@@ -92,6 +92,7 @@ h1 {
     width: 200px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 10px;
 }
 
 .tmdb-logo {
@@ -116,6 +117,10 @@ h1 {
 
 .genre-label {
     margin-top: 20px;
+}
+
+.moviePoster {
+    box-shadow: 1px 1px 10px white;
 }
 
 select {
@@ -238,21 +243,22 @@ span {
 
 .release-year-labels {
     display: flex;
+    flex-direction: column;
     text-align: center;
     align-items: center;
-    justify-content: space-between;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.release-year-instruct {
-    line-height: 8px;
 }
 
 .name {
     margin-top: 10px;
 }
 
+.year-label {
+    margin-bottom: 10px;
+}
+
+.to {
+    margin-top: 45px;
+}
 @media screen and (min-width: 600px) {
     .js-streaming {
         display: flex;

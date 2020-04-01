@@ -10,7 +10,6 @@
     <header>
         <h1>CantDecide</h1>
     </header>
-    <main>
         <div class="instructions-container">
             <p class="app-info">This app uses the The Movie Database and Utelly APIs to provide you with a random movie recommendation.</p>
             <p class="app-info">Hit the button below to begin.</p>
@@ -22,15 +21,16 @@
         </div>
         <form class="search js-search hidden">
             <p class="release-year-instruct">Set release years (if you want)</p>
-            <div class="release-year-label-containter">
-                <div class="release-year-labels">
-                    <label for="number1">Min Year</label>
-                    <label for="number2">Max Year</label>
-                </div>
             <div class="release-year-container">
-                <input type="number" placeholder="1990" id="number1" min="1900" max="2020" class="search-input js-min-year">
-                <p>to</p>
-                <input type="number" placeholder="2020" id="number2" min="1900" max="2020" class="search-input js-max-year">
+                <div class="release-year-labels">
+                    <label for="number1" class="year-label">Min Year</label>
+                    <input type="number" placeholder="1990" id="number1" min="1900" max="2020" class="search-input year js-min-year">
+                </div>
+                <p class="to">to</p>
+                <div class="release-year-labels">
+                    <label for="number2" class="year-label">Max Year</label>
+                    <input type="number" placeholder="2020" id="number2" min="1900" max="2020" class="search-input year js-max-year">
+                </div>
             </div>
             <label for="name">
                 <span class="input-label">Name a movie person</span>
@@ -73,7 +73,6 @@
         </section>
         <div class="new-search js-new-search-container">
         </div>
-    </main>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="script.js"></script>
 </body>
