@@ -253,6 +253,10 @@ span {
     margin-bottom: 10px;
 }
 
+.year {
+    width: 60px;
+}
+
 .to {
     margin-top: 45px;
 }
