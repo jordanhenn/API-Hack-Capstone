@@ -134,8 +134,9 @@ li {
     align-items: center;
 }
 
-h3 {
+h2 {
     margin-top: 0;
+    font-size: 24px;
 }
 
 .not-available {

@@ -7,70 +7,73 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <h1>CantDecide</h1>
-    <div class="instructions-container">
-        <p class="app-info">This app uses the The Movie Database and Utelly APIs to provide you with a random movie recommendation.</p>
-        <p class="app-info">Hit the button below to begin.</p>
-        <button type="button" class="begin-button js-close-instructions">Begin</button>
-        <div class="tmdb-container">
-            <img class ="tmdb-logo" src="./tmdb_logo.svg" alt="The Movie Databse logo."/>
-            <p class="tmdb-disclosure">This product uses the TMDb API but is not endorsed or certified by TMDb.</p>
-        </div>
-    </div>
-    <form class="search js-search hidden">
-        <p class="release-year-instruct">Set release years (if you want)</p>
-        <div class="release-year-label-containter">
-            <div class="release-year-labels">
-                <label for="number1">Min Year</label>
-                <label for="number2">Max Year</label>
+    <header>
+        <h1>CantDecide</h1>
+    </header>
+    <main>
+        <div class="instructions-container">
+            <p class="app-info">This app uses the The Movie Database and Utelly APIs to provide you with a random movie recommendation.</p>
+            <p class="app-info">Hit the button below to begin.</p>
+            <button type="button" class="begin-button js-close-instructions">Begin</button>
+            <div class="tmdb-container">
+                <img class ="tmdb-logo" src="./tmdb_logo.svg" alt="The Movie Databse logo."/>
+                <p class="tmdb-disclosure">This product uses the TMDb API but is not endorsed or certified by TMDb.</p>
             </div>
+        </div>
+        <form class="search js-search hidden">
+            <p class="release-year-instruct">Set release years (if you want)</p>
+            <div class="release-year-label-containter">
+                <div class="release-year-labels">
+                    <label for="number1">Min Year</label>
+                    <label for="number2">Max Year</label>
+                </div>
             <div class="release-year-container">
                 <input type="number" placeholder="1990" id="number1" min="1900" max="2020" class="search-input js-min-year">
                 <p>to</p>
                 <input type="number" placeholder="2020" id="number2" min="1900" max="2020" class="search-input js-max-year">
             </div>
+            <label for="name">
+                <span class="input-label">Name a movie person</span>
+                <span class="input-label">(if you feel like it)</span>
+            </label>
+            <input type="text" placeholder="Tom Cruise" id="name" class="search-input name js-name">
+            <label for="genre" class="genre-label">Pick a genre (or don't)</label>
+            <select id="genre" class="search-input js-genre">
+                <option value="All-Genres" selected>All Genres</option>
+                <option value="28">Action</option>
+                <option value="12">Adventure</option>
+                <option value="16">Animation</option>
+                <option value="35">Comedy</option>
+                <option value="80">Crime</option>
+                <option value="99">Documentary</option>
+                <option value="18">Drama</option>
+                <option value="10751">Family</option>
+                <option value="14">Fantasy</option>
+                <option value="36">Historical</option>
+                <option value="27">Horror</option>
+                <option value="10402">Music</option>
+                <option value="9648">Mystery</option>
+                <option value="10749">Romance</option>
+                <option value="878">SciFi</option>
+                <option value="10770">TV Movie</option>
+                <option value="53">Thriller</option>
+                <option value="10752">War</option>
+                <option value="37">Western</option>
+            </select>
+            <button class="search-button" type="submit">Search</button>
+        </form>
+        <h3 class="js-error-message"></h3>
+        <section class="results-area hidden js-results-area">
+            <ul class='js-results'>
+            </ul>
+        </section>
+        <section class="streaming-area hidden js-streaming-area">
+            <ul class="js-streaming"> 
+            </ul>
+        </section>
+        <div class="new-search js-new-search-container">
         </div>
-        <label for="name">
-            <span class="input-label">Name a movie person</span>
-            <span class="input-label">(if you feel like it)</span>
-        </label>
-        <input type="text" placeholder="Tom Cruise" id="name" class="search-input name js-name">
-        <label for="genre" class="genre-label">Pick a genre (or don't)</label>
-        <select id="genre" class="search-input js-genre">
-            <option value="All-Genres" selected>All Genres</option>
-            <option value="28">Action</option>
-            <option value="12">Adventure</option>
-            <option value="16">Animation</option>
-            <option value="35">Comedy</option>
-            <option value="80">Crime</option>
-            <option value="99">Documentary</option>
-            <option value="18">Drama</option>
-            <option value="10751">Family</option>
-            <option value="14">Fantasy</option>
-            <option value="36">Historical</option>
-            <option value="27">Horror</option>
-            <option value="10402">Music</option>
-            <option value="9648">Mystery</option>
-            <option value="10749">Romance</option>
-            <option value="878">SciFi</option>
-            <option value="10770">TV Movie</option>
-            <option value="53">Thriller</option>
-            <option value="10752">War</option>
-            <option value="37">Western</option>
-        </select>
-        <button class="search-button" type="submit">Search</button>
-    </form>
-    <h3 class="js-error-message"></h3>
-    <section class="results-area hidden js-results-area">
-        <ul class='js-results'>
-        </ul>
-    </section>
-    <section class="streaming-area hidden js-streaming-area">
-        <ul class="js-streaming"> 
-        </ul>
-    </section>
-    <div class="new-search js-new-search-container">
-    </div>
+    </main>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="script.js"></script>
 </body>

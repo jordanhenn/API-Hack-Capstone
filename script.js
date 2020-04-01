@@ -304,7 +304,7 @@ function displayMovie(responseJson) {
                 $('.js-results').append(
                     `<li>
                     <h3 class="movieTitle">${responseJson.results[randomMovie].title} (${movieYear})</h3>
-                    <img class="moviePoster" src="https://image.tmdb.org/t/p/w185/${responseJson.results[randomMovie].poster_path}">
+                    <img class="moviePoster" src="https://image.tmdb.org/t/p/w185/${responseJson.results[randomMovie].poster_path}" alt="A poster for ${responseJson.results[randomMovie].title}">
                     <p class="js-overview overview">${responseJson.results[randomMovie].overview}</p>
                     <button type="button" class="stream-button js-show-streams">Where's it streaming?</button>
                     </li>`
