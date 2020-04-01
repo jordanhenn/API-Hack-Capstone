@@ -2,7 +2,18 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: "Gobold";
+    src: url("./gobold/Gobold\ Extra2.otf");
+}
+
+@font-face {
+    font-family: "Karla";
+    src: url("./Karla/Karla-Regular.ttf")
+}
+
 body {
+    font-family: Karla;
     background-color: black;
     color: white;
     display: flex;
@@ -28,18 +39,33 @@ body {
 }
 
 .search-input {
-    border-radius: 5px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+    border: none;
     height: 35px;
     text-align: center;
     font-size: 16px;
 }
 
+.search-input::placeholder {
+    color: lightgrey;
+}
+
+label {
+    font-size: 18px;
+}
+
 h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Gobold;
     background-color: rgba(255, 0, 0, 0.678);
     padding: 10px;
     border-radius: 10px;
     width: 300px;
-    height: 55px;
+    height: 55px; 
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 0px;
@@ -59,6 +85,8 @@ h1 {
     align-items: center;
     justify-content: space-evenly;
     width: 200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .tmdb-logo {
@@ -74,6 +102,7 @@ h1 {
 
 .app-info {
     width: 300px;
+    font-size: 18px;
 }
 
 .results-area {
@@ -85,10 +114,6 @@ h1 {
 }
 
 select {
-    margin-top: 10px;
-}
-
-input[type="text"] {
     margin-top: 10px;
 }
 
@@ -147,7 +172,7 @@ h3 {
     margin-left: 10px;
 }
 
-.stream-button, .begin-button, .search-button, .new-search-button { 
+.stream-button, .begin-button, .search-button, .new-search-button {
     background-color: rgba(255, 0, 0, 0.678);
     padding: 10px;
     border-radius: 10px;
@@ -159,6 +184,7 @@ h3 {
     display: flex;
     align-self: center;
     justify-content: center;
+    font-family: Karla;
 }
 
 .search-button {
@@ -183,4 +209,38 @@ h3 {
 
 .new-search-button:hover {
     background-color: rgba(238, 84, 84, 0.678);
+}
+
+.stream-service {
+    height: 40px;
+    border-radius: 5px;
+    padding: 1px;
+}
+
+.input-label {
+    line-height: 8px;
+}
+
+.movieTitle {
+    margin-top: 5px;
+}
+
+.overview {
+    margin-bottom: 20px;
+}
+
+@media screen and (min-width: 600px) {
+    .js-streaming {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .js-streaming li {
+        padding-left: 2.5px;
+        padding-right: 2.5px;
+    }
+
+    .overview {
+        width: 500px;
+    }
 }

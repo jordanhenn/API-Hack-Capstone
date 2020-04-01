@@ -266,16 +266,17 @@ function getMovieNoGenre(minReleaseYear,maxReleaseYear,famousPersonID,pageTotal)
 function displayMovie(responseJson) {
     console.log(responseJson);
     if (responseJson.total_results == 0){
-        $('.js-results-area').removeClass('hidden');
         $('.js-results').append(
             `<li>
             <p class="not-available">No movie found.</p>
             <p class="not-available">Please refine your search.</p>
             </li>`);
+        $('.js-new-search-container').addClass("hidden");
         $('.js-new-search-container').append(`
             <button type="button" class="new-search-button js-new-search">New Search</button>`);
+        $('.js-results-area').removeClass("hidden").hide().fadeIn("slow");
+        $('.js-new-search-container').removeClass("hidden").hide().fadeIn("slow");
     } else {
-        $('.js-results-area').removeClass('hidden');
         const randomMovie = Math.floor(Math.random() * responseJson.results.length);
             if(responseJson.results[randomMovie].poster_path == null) {
                 const movieYear = responseJson.results[randomMovie].release_date.slice(0,4);
@@ -286,11 +287,13 @@ function displayMovie(responseJson) {
                     <button type="button" class="stream-button js-show-streams">Where's it streaming?</button>
                     </li>`
                 );
+                $('.js-new-search-container').addClass("hidden");
                 $('.js-new-search-container').append(`
                 <button type="button" class="new-search-button js-new-search">New Search</button>`);
+                $('.js-results-area').removeClass("hidden").hide().fadeIn("slow");
+                $('.js-new-search-container').removeClass("hidden").hide().fadeIn("slow");
                 const randomMovieID = responseJson.results[randomMovie].id;
                 $('body').on("click", ".js-show-streams", event => {
-                    $('.js-streaming').empty();
                     $('.js-overview').hide();
                     $('.js-show-streams').hide();
                     getStream(randomMovieID);
@@ -300,16 +303,18 @@ function displayMovie(responseJson) {
                 $('.js-results').append(
                     `<li>
                     <h3 class="movieTitle">${responseJson.results[randomMovie].title} (${movieYear})</h3>
-                    <img class="moviePoster" src="http://image.tmdb.org/t/p/w185/${responseJson.results[randomMovie].poster_path}">
-                    <p class="js-overview">${responseJson.results[randomMovie].overview}</p>
+                    <img class="moviePoster" src="https://image.tmdb.org/t/p/w185/${responseJson.results[randomMovie].poster_path}">
+                    <p class="js-overview overview">${responseJson.results[randomMovie].overview}</p>
                     <button type="button" class="stream-button js-show-streams">Where's it streaming?</button>
                     </li>`
                 );
+                $('.js-new-search-container').addClass("hidden");
                 $('.js-new-search-container').append(`
                 <button type="button" class="new-search-button js-new-search">New Search</button>`);
+                $('.js-results-area').removeClass("hidden").hide().fadeIn("slow");
+                $('.js-new-search-container').removeClass("hidden").hide().fadeIn("slow");
                 const randomMovieID = responseJson.results[randomMovie].id;
                 $('body').on("click", ".js-show-streams", event => {
-                    $('.js-streaming').empty();
                     $('.js-overview').hide();
                     $('.js-show-streams').hide();
                     getStream(randomMovieID);
@@ -319,7 +324,6 @@ function displayMovie(responseJson) {
 }
 
 function getStream(randomMovieID) {
-    $('.js-streaming').empty();
     const params = {
         source_id: randomMovieID,
         source: "tmdb",
@@ -347,7 +351,7 @@ function getStream(randomMovieID) {
 function displayStreams(responseJson) {
     console.log(responseJson);
     $('.js-streaming').empty();
-    $('.js-streaming-area').removeClass('hidden');
+    $('.js-streaming-area').removeClass('hidden')
     if (responseJson.collection.locations.length === 0){
         $('.js-streaming').append(
             `<li>
@@ -385,8 +389,19 @@ function fetchID(famousPerson,minReleaseYear,maxReleaseYear,genre){
         throw new Error(response.statusText);
         })
         .then(responseJson => {
-            const famousPersonID = responseJson.results[0].id;
-            fetchPageTotal(minReleaseYear, maxReleaseYear,famousPersonID, genre);
+            if(responseJson.total_results == 0) {
+                $('.js-results-area').removeClass('hidden');
+                $('.js-results').append(
+                    `<li>
+                    <p class="not-available">Couldn't find a movie person with that name.</p>
+                    <p class="not-available">Please refine your search.</p>
+                    </li>`);
+                $('.js-new-search-container').append(`
+                    <button type="button" class="new-search-button js-new-search">New Search</button>`);  
+            } else {
+                const famousPersonID = responseJson.results[0].id;
+                fetchPageTotal(minReleaseYear, maxReleaseYear,famousPersonID, genre);
+            }
         })
         .catch(err => {
             $('.js-error-message').text(`Error: ${err.message}`)
@@ -412,8 +427,19 @@ function fetchIDNoGenre(famousPerson,minReleaseYear,maxReleaseYear){
         throw new Error(response.statusText);
         })
         .then(responseJson => {
-            const famousPersonID = responseJson.results[0].id;
-            fetchPageTotalNoGenre(minReleaseYear, maxReleaseYear,famousPersonID);
+            if(responseJson.total_results == 0) {
+                $('.js-results-area').removeClass('hidden');
+                $('.js-results').append(
+                    `<li>
+                    <p class="not-available">Couldn't find a movie person with that name.</p>
+                    <p class="not-available">Please refine your search.</p>
+                    </li>`);
+                $('.js-new-search-container').append(`
+                    <button type="button" class="new-search-button js-new-search">New Search</button>`);  
+            } else {
+                const famousPersonID = responseJson.results[0].id;
+                fetchPageTotalNoGenre(minReleaseYear, maxReleaseYear,famousPersonID);
+            }
         })
         .catch(err => {
             $('.js-error-message').text(`Error: ${err.message}`)
@@ -434,13 +460,18 @@ function showSearch(){
 
 function newSearch(){
     $('body').on("click",".js-new-search", event => {
+        $('.js-results-area').hide()
+        $('.js-streaming-area').hide()
+        $('.js-new-search-container').hide()
+        $('.js-error-message').hide()
         $('.js-results').empty();
-        $('.js-streaming').empty();
-        $('.js-streaming-area').hide();
-        $('.js-results-area').hide();
+        $('.js-max-year').val('');
+        $('.js-min-year').val('');
+        $('.js-name').val('');
+        $('.js-genre').val('All-Genres')
         $('.js-new-search-container').empty();
         $('.js-error-message').text(''); 
-        $('.js-search').show();
+        $('.js-search').fadeIn("slow");
     });
 }
 
@@ -451,9 +482,9 @@ function watchForm(){
         $('.js-streaming-area').addClass('hidden');
         $('.js-results').empty();
         $('.js-streaming').empty();
+        $('.js-search').fadeOut();
         $('.js-streaming-area').show();
         $('.js-results-area').show();
-        $('.js-search').hide();
         $('.js-error-message').text('');
         const maxYear = $('.js-max-year').val();
         const minYear= $('.js-min-year').val();

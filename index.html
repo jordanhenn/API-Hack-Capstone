@@ -10,7 +10,7 @@
     <h1>CantDecide</h1>
     <div class="instructions-container">
         <p class="app-info">This app uses the The Movie Database and Utelly APIs to provide you with a random movie recommendation.</p>
-        <p class="app info">Hit the button below to begin.</p>
+        <p class="app-info">Hit the button below to begin.</p>
         <button type="button" class="begin-button js-close-instructions">Begin</button>
         <div class="tmdb-container">
             <img class ="tmdb-logo" src="./tmdb_logo.svg" alt="The Movie Databse logo."/>
@@ -19,16 +19,19 @@
     </div>
     <form class="search js-search hidden">
         <div class="release-year-label-containter">
-            <label for="number">Set Release Years:</label>
+            <label for="number">Set release years (if you want)</label>
             <div class="release-year-container">
                 <input type="number" placeholder="1990" id="number" min="1900" max="2020" class="search-input js-min-year">
                 <p>to</p>
                 <input type="number" placeholder="2020" id="number" min="1900" max="2020" class="search-input js-max-year">
             </div>
         </div>
-        <label for="name">Name a movie person:</label>
-        <input type="text" placeholder="Tom Cruise" id="name" class="search-input js-name">
-        <label for="genre" class="genre-label">Pick a genre:</label>
+        <label for="name">
+            <p class="input-label">Name a movie person</p>
+            <p class="input-label">(if you feel like it)</p>
+        </label>
+        <input type="text" placeholder="Tom Cruise" id="name" class="search-input name js-name">
+        <label for="genre" class="genre-label">Pick a genre (or don't)</label>
         <select id="Genres" class="search-input js-genre">
             <option value="All-Genres" selected>All Genres</option>
             <option value="28">Action</option>
