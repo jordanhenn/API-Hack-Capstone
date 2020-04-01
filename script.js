@@ -17,11 +17,13 @@ const peopleURL = "https://api.themoviedb.org/3/search/person";
 const streamURL = "https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/idlookup";
 
 function formatQueryParams(params){
+    //formats objects into queries to be appended to end of API urls
     const queryItems = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
     return queryItems.join('&');
 }
 
 function fetchPageTotal(minReleaseYear,maxReleaseYear,famousPersonID,genre){
+    //takes total pages from tmdb response in order to obtain a random page number
     const params = {
         'primary_release_date.gte': minReleaseYear,
         'primary_release_date.lte': maxReleaseYear,
@@ -53,6 +55,7 @@ function fetchPageTotal(minReleaseYear,maxReleaseYear,famousPersonID,genre){
 }
 
 function fetchPageTotalNoName(minReleaseYear,maxReleaseYear,genre){
+    //does same as fetchPageTotal if no name is provided in search form
     const params = {
         'primary_release_date.gte': minReleaseYear,
         'primary_release_date.lte': maxReleaseYear,
@@ -83,6 +86,7 @@ function fetchPageTotalNoName(minReleaseYear,maxReleaseYear,genre){
 }
 
 function fetchPageTotalNoNameNoGenre(minReleaseYear,maxReleaseYear){
+    //does same as fetchPageTotal if no name or genre is provided in search form
     const params = {
         'primary_release_date.gte': minReleaseYear,
         'primary_release_date.lte': maxReleaseYear,
@@ -112,6 +116,7 @@ function fetchPageTotalNoNameNoGenre(minReleaseYear,maxReleaseYear){
 }
 
 function fetchPageTotalNoGenre(minReleaseYear,maxReleaseYear,famousPersonID){
+    //does same as fetchPageTotal if no genre is provided in search form
     const params = {
         'primary_release_date.gte': minReleaseYear,
         'primary_release_date.lte': maxReleaseYear,
@@ -142,6 +147,7 @@ function fetchPageTotalNoGenre(minReleaseYear,maxReleaseYear,famousPersonID){
 }
 
 function getPageNumber(pageTotal) { 
+    //use total page count from tmdb responseJson to pick a random page
     const pageNumber = Math.floor(Math.random() * pageTotal);
     if (pageNumber !== 0) {
         return pageNumber;
@@ -151,6 +157,7 @@ function getPageNumber(pageTotal) {
 }
 
 function getMovie(minReleaseYear,maxReleaseYear,famousPersonID,pageTotal,genre){
+    //fetches movie from tmdb API
     const params = {
         'primary_release_date.gte': minReleaseYear,
         'primary_release_date.lte': maxReleaseYear,
@@ -180,6 +187,7 @@ function getMovie(minReleaseYear,maxReleaseYear,famousPersonID,pageTotal,genre){
 }
 
 function getMovieNoName(minReleaseYear,maxReleaseYear,pageTotal,genre){
+    //fetches movie from tmdb API if no name is provided in search form
     const params = {
         'primary_release_date.gte': minReleaseYear,
         'primary_release_date.lte': maxReleaseYear,
@@ -208,6 +216,7 @@ function getMovieNoName(minReleaseYear,maxReleaseYear,pageTotal,genre){
 }
 
 function getMovieNoNameNoGenre(minReleaseYear,maxReleaseYear,pageTotal){
+    //fetches movie from tmdb API if no name or genre is provided in search form
     const params = {
         'primary_release_date.gte': minReleaseYear,
         'primary_release_date.lte': maxReleaseYear,
@@ -235,6 +244,7 @@ function getMovieNoNameNoGenre(minReleaseYear,maxReleaseYear,pageTotal){
 }
 
 function getMovieNoGenre(minReleaseYear,maxReleaseYear,famousPersonID,pageTotal){
+    //fetches movie from tmdb API if no genre is provided in search form
     const params = {
         'primary_release_date.gte': minReleaseYear,
         'primary_release_date.lte': maxReleaseYear,
@@ -264,6 +274,7 @@ function getMovieNoGenre(minReleaseYear,maxReleaseYear,famousPersonID,pageTotal)
 
 
 function displayMovie(responseJson) {
+    //uses tmdb responseJson to display movie info on page
     console.log(responseJson);
     if (responseJson.total_results == 0){
         $('.js-results').append(
@@ -326,6 +337,7 @@ function displayMovie(responseJson) {
 }
 
 function getStream(randomMovieID) {
+    //uses tmdb ID from tmdb responseJson to fetch streaming info from Utelly API
     $('.js-streaming').empty();
     const params = {
         source_id: randomMovieID,
@@ -352,6 +364,7 @@ function getStream(randomMovieID) {
 }
 
 function displayStreams(responseJson) {
+    //uses Utelly responseJson to display streaming info on page
     console.log(responseJson);
     if (responseJson.collection.locations.length === 0){
         $('.js-streaming').empty();
@@ -374,6 +387,7 @@ function displayStreams(responseJson) {
 }
 
 function fetchID(famousPerson,minReleaseYear,maxReleaseYear,genre){
+    //uses the name provided in search form to retrieve their tmdb ID from the tmdb API
     const params = {
         query: famousPerson,
         api_key: tmdb_ApiKey
@@ -412,6 +426,7 @@ function fetchID(famousPerson,minReleaseYear,maxReleaseYear,genre){
 }
 
 function fetchIDNoGenre(famousPerson,minReleaseYear,maxReleaseYear){
+    //uses the name provided in search form to retrieve their tmdb ID from the tmdb API when no genre is provided
     const params = {
         query: famousPerson,
         api_key: tmdb_ApiKey
@@ -450,6 +465,7 @@ function fetchIDNoGenre(famousPerson,minReleaseYear,maxReleaseYear){
 }
 
 function showSearch(){
+    //shows search form after hitting 'begin' button
     $('.js-close-instructions').on("click", event => {
         $('.instructions-container').fadeOut({
             complete: function() {
@@ -460,6 +476,7 @@ function showSearch(){
 }
 
 function newSearch(){
+    //shows search form after hitting 'new search' button
     $('body').on("click",".js-new-search", event => {
         $('.js-results-area').hide()
         $('.js-streaming-area').hide()
@@ -478,6 +495,7 @@ function newSearch(){
 }
 
 function watchForm(){
+    //obtains values from search inputs when form is submited and sends them through API
     $('.js-search').submit(event => {
         event.preventDefault();
         $('.js-results-area').addClass('hidden');
@@ -507,6 +525,9 @@ function watchForm(){
 }
 
 function getMaxReleaseYear(maxYear) {
+    //determines if max release year input is filled out
+    //appends month and day to year
+    //checks if 2020 has been entered and adds current month and day if so
     if (maxYear == '') {
         const today = new Date();
             const dd = String(today.getDate()).padStart(2, '0');
@@ -529,6 +550,8 @@ function getMaxReleaseYear(maxYear) {
 }
 
 function getMinReleaseYear(minYear) {
+    //determines if max release year input is filled out
+    //appends month and day to year
     if (minYear == '') {
         const minReleaseYear = '1900-01-01';
         return minReleaseYear;
