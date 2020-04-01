@@ -294,6 +294,7 @@ function displayMovie(responseJson) {
                 $('.js-new-search-container').removeClass("hidden").hide().fadeIn("slow");
                 const randomMovieID = responseJson.results[randomMovie].id;
                 $('body').on("click", ".js-show-streams", event => {
+                    $('.js-streaming').empty();
                     $('.js-overview').hide();
                     $('.js-show-streams').hide();
                     getStream(randomMovieID);
@@ -315,6 +316,7 @@ function displayMovie(responseJson) {
                 $('.js-new-search-container').removeClass("hidden").hide().fadeIn("slow");
                 const randomMovieID = responseJson.results[randomMovie].id;
                 $('body').on("click", ".js-show-streams", event => {
+                    $('.js-streaming').empty();
                     $('.js-overview').hide();
                     $('.js-show-streams').hide();
                     getStream(randomMovieID);
@@ -324,6 +326,7 @@ function displayMovie(responseJson) {
 }
 
 function getStream(randomMovieID) {
+    $('.js-streaming').empty();
     const params = {
         source_id: randomMovieID,
         source: "tmdb",
@@ -350,9 +353,8 @@ function getStream(randomMovieID) {
 
 function displayStreams(responseJson) {
     console.log(responseJson);
-    $('.js-streaming').empty();
-    $('.js-streaming-area').removeClass('hidden')
     if (responseJson.collection.locations.length === 0){
+        $('.js-streaming').empty();
         $('.js-streaming').append(
             `<li>
             <p class="not-available">This title is not currently available for streaming.</p>
@@ -360,6 +362,7 @@ function displayStreams(responseJson) {
         ); 
     } else {
         for (let i = 0; i < responseJson.collection.locations.length; i++) {
+            $('.js-streaming').empty();
             $('.js-streaming').append(
                 `<li>
                 <a target="_blank" href="${responseJson.collection.locations[i].url}"><img class="stream-service" src="${responseJson.collection.locations[i].icon}" alt="A link to ${responseJson.collection.locations[i].display_name}"></a>
@@ -367,9 +370,7 @@ function displayStreams(responseJson) {
             );
         }
     }
-    $('js-streaming').append(`
-    <button type="button" class="new-search-button js-new-search">New Search</button>`
-    );
+    $('.js-streaming-area').removeClass('hidden');
 }
 
 function fetchID(famousPerson,minReleaseYear,maxReleaseYear,genre){
@@ -465,6 +466,7 @@ function newSearch(){
         $('.js-new-search-container').hide()
         $('.js-error-message').hide()
         $('.js-results').empty();
+        $('.js-streaming').empty();
         $('.js-max-year').val('');
         $('.js-min-year').val('');
         $('.js-name').val('');
