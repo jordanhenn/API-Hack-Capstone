@@ -1,5 +1,5 @@
 # [CantDecide](https://jordanhenn.github.io/cantdecide/) #
-The ultimate movie recommendation app. Made using the tMDB and Utelly APIs. 
+The ultimate movie recommendation app. Made using the TMDb and Utelly APIs. 
 
 ## Screenshots and Summary ##
 ![Home page](./readmephotos/homepage.png)  
