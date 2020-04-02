@@ -16,7 +16,7 @@ The initial movie recommendation returned from the tmdb API after hitting the se
 
 ![Streaming locations](./readmephotos/streaminglocation.png)  
 
-Once the user hits the "Where is it streaming button?" on the previous page, the movie's tmdb ID is sent through the Utelly API to retrieve its current streaming locations. 
+Once the user hits the "Where's it streaming?" button on the previous page, the movie's tmdb ID is sent through the Utelly API to retrieve its current streaming locations. 
 
 ### Tech used ###
 HTML/CSS/JavaScript/jQuery
