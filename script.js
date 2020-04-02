@@ -401,14 +401,19 @@ function fetchID(famousPerson,minReleaseYear,maxReleaseYear,genre){
         })
         .then(responseJson => {
             if(responseJson.total_results == 0) {
-                $('.js-results-area').removeClass('hidden');
                 $('.js-results').append(
                     `<li>
                     <p class="not-available">Couldn't find a movie person with that name.</p>
                     <p class="not-available">Please refine your search.</p>
                     </li>`);
+                $('.js-new-search-container').addClass('hidden');
                 $('.js-new-search-container').append(`
                     <button type="button" class="new-search-button js-new-search">New Search</button>`);  
+                $('.js-search').fadeOut({
+                        complete: function() {
+                          $('.js-results-area').removeClass("hidden").hide().fadeIn("slow");
+                          $('.js-new-search-container').removeClass("hidden").hide().fadeIn("slow");
+                }});
             } else {
                 const famousPersonID = responseJson.results[0].id;
                 fetchPageTotal(minReleaseYear, maxReleaseYear,famousPersonID, genre);
@@ -416,8 +421,10 @@ function fetchID(famousPerson,minReleaseYear,maxReleaseYear,genre){
         })
         .catch(err => {
             $('.js-error-message').text(`Error: ${err.message}`)
-            $('.js-new-search-container').append(`
-        <button type="button" class="new-search-button js-new-search">New Search</button>`);
+            $('.js-search').fadeOut({
+                complete: function() {
+                  $('.js-new-search-container').removeClass("hidden").hide().fadeIn("slow");
+        }});
         });
 }
 
@@ -439,14 +446,19 @@ function fetchIDNoGenre(famousPerson,minReleaseYear,maxReleaseYear){
         })
         .then(responseJson => {
             if(responseJson.total_results == 0) {
-                $('.js-results-area').removeClass('hidden');
                 $('.js-results').append(
                     `<li>
                     <p class="not-available">Couldn't find a movie person with that name.</p>
                     <p class="not-available">Please refine your search.</p>
                     </li>`);
+                $('.js-new-search-container').addClass('hidden');
                 $('.js-new-search-container').append(`
                     <button type="button" class="new-search-button js-new-search">New Search</button>`);  
+                $('.js-search').fadeOut({
+                        complete: function() {
+                          $('.js-results-area').removeClass("hidden").hide().fadeIn("slow");
+                          $('.js-new-search-container').removeClass("hidden").hide().fadeIn("slow");
+                }});  
             } else {
                 const famousPersonID = responseJson.results[0].id;
                 fetchPageTotalNoGenre(minReleaseYear, maxReleaseYear,famousPersonID);
