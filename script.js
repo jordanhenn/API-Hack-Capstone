@@ -498,10 +498,6 @@ function newSearch(){
         $('.js-error-message').hide()
         $('.js-results').empty();
         $('.js-streaming').empty();
-        $('.js-max-year').val('');
-        $('.js-min-year').val('');
-        $('.js-name').val('');
-        $('.js-genre').val('All-Genres')
         $('.js-new-search-container').empty();
         $('.js-error-message').text(''); 
         $('.js-search').fadeIn("slow");
