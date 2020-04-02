@@ -492,10 +492,10 @@ $('body').on("click", ".js-show-streams", event => {
 function newSearch(){
     //shows search form after hitting 'new search' button
     $('body').on("click",".js-new-search", event => {
-        $('.js-results-area').hide()
-        $('.js-streaming-area').hide()
-        $('.js-new-search-container').hide()
-        $('.js-error-message').hide()
+        $('.js-results-area').hide();
+        $('.js-streaming-area').hide();
+        $('.js-new-search-container').hide();
+        $('.js-error-message').hide();
         $('.js-results').empty();
         $('.js-streaming').empty();
         $('.js-new-search-container').empty();
