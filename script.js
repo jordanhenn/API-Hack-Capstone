@@ -49,7 +49,7 @@ function fetchPageTotal(minReleaseYear,maxReleaseYear,famousPersonID,genre){
         })
         .catch(err => {
             $('.js-error-message').text(`Error: ${err.message}`);
-            $('.js-new-search-container').append(`
+            $('.js-new-search-container').html(`
         <button type="button" class="new-search-button js-new-search">New Search</button>`);
     });
 }
@@ -80,7 +80,7 @@ function fetchPageTotalNoName(minReleaseYear,maxReleaseYear,genre){
         })
         .catch(err => {
             $('.js-error-message').text(`Error: ${err.message}`);
-            $('.js-new-search-container').append(`
+            $('.js-new-search-container').html(`
         <button type="button" class="new-search-button js-new-search">New Search</button>`);
     });
 }
@@ -110,7 +110,7 @@ function fetchPageTotalNoNameNoGenre(minReleaseYear,maxReleaseYear){
         })
         .catch(err => {
             $('.js-error-message').text(`Error: ${err.message}`);
-            $('.js-new-search-container').append(`
+            $('.js-new-search-container').html(`
         <button type="button" class="new-search-button js-new-search">New Search</button>`);
     });
 }
@@ -141,7 +141,7 @@ function fetchPageTotalNoGenre(minReleaseYear,maxReleaseYear,famousPersonID){
         })
         .catch(err => {
             $('.js-error-message').text(`Error: ${err.message}`);
-            $('.js-new-search-container').append(`
+            $('.js-new-search-container').html(`
         <button type="button" class="new-search-button js-new-search">New Search</button>`);
     });
 }
@@ -181,7 +181,7 @@ function getMovie(minReleaseYear,maxReleaseYear,famousPersonID,pageTotal,genre){
         .then(responseJson => displayMovie(responseJson))
         .catch(err => {
             $('.js-error-message').text(`Error: ${err.message}`);
-            $('.js-new-search-container').append(`
+            $('.js-new-search-container').html(`
         <button type="button" class="new-search-button js-new-search">New Search</button>`);
     });
 }
@@ -210,7 +210,7 @@ function getMovieNoName(minReleaseYear,maxReleaseYear,pageTotal,genre){
         .then(responseJson => displayMovie(responseJson))
         .catch(err => {
             $('.js-error-message').text(`Error: ${err.message}`);
-            $('.js-new-search-container').append(`
+            $('.js-new-search-container').html(`
         <button type="button" class="new-search-button js-new-search">New Search</button>`);
     });
 }
@@ -238,7 +238,7 @@ function getMovieNoNameNoGenre(minReleaseYear,maxReleaseYear,pageTotal){
         .then(responseJson => displayMovie(responseJson))
         .catch(err => {
             $('.js-error-message').text(`Error: ${err.message}`);
-            $('.js-new-search-container').append(`
+            $('.js-new-search-container').html(`
         <button type="button" class="new-search-button js-new-search">New Search</button>`);
     });
 }
@@ -267,7 +267,7 @@ function getMovieNoGenre(minReleaseYear,maxReleaseYear,famousPersonID,pageTotal)
         .then(responseJson => displayMovie(responseJson))
         .catch(err => {
             $('.js-error-message').text(`Error: ${err.message}`);
-            $('.js-new-search-container').append(`
+            $('.js-new-search-container').html(`
         <button type="button" class="new-search-button js-new-search">New Search</button>`);
     });
 }
@@ -282,8 +282,7 @@ function displayMovie(responseJson) {
             <p class="not-available">No movie found.</p>
             <p class="not-available">Please refine your search.</p>
             </li>`);
-        $('.js-new-search-container').addClass("hidden");
-        $('.js-new-search-container').append(`
+        $('.js-new-search-container').html(`
             <button type="button" class="new-search-button js-new-search">New Search</button>`);
         $('.js-search').fadeOut({
             complete: function() {
@@ -301,8 +300,7 @@ function displayMovie(responseJson) {
                     <button type="button" class="stream-button js-show-streams">Where's it streaming?</button>
                     </li>`
                 );
-                $('.js-new-search-container').addClass("hidden");
-                $('.js-new-search-container').append(`
+                $('.js-new-search-container').html(`
                 <button type="button" class="new-search-button js-new-search">New Search</button>`);
                 $('.js-search').fadeOut({
                     complete: function() {
@@ -319,8 +317,7 @@ function displayMovie(responseJson) {
                     <button type="button" class="stream-button js-show-streams">Where's it streaming?</button>
                     </li>`
                 );
-                $('.js-new-search-container').addClass("hidden");
-                $('.js-new-search-container').append(`
+                $('.js-new-search-container').html(`
                 <button type="button" class="new-search-button js-new-search">New Search</button>`);
                 $('.js-search').fadeOut({
                     complete: function() {
@@ -357,7 +354,7 @@ function getStream(randomMovieID) {
         })
         .catch(err => {
             $('.js-error-message').text(`Error: ${err.message}`);
-            $('.js-new-search-container').append(`
+            $('.js-new-search-container').html(`
         <button type="button" class="new-search-button js-new-search">New Search</button>`);
     });
 }
@@ -406,8 +403,7 @@ function fetchID(famousPerson,minReleaseYear,maxReleaseYear,genre){
                     <p class="not-available">Couldn't find a movie person with that name.</p>
                     <p class="not-available">Please refine your search.</p>
                     </li>`);
-                $('.js-new-search-container').addClass('hidden');
-                $('.js-new-search-container').append(`
+                $('.js-new-search-container').html(`
                     <button type="button" class="new-search-button js-new-search">New Search</button>`);  
                 $('.js-search').fadeOut({
                         complete: function() {
@@ -451,12 +447,11 @@ function fetchIDNoGenre(famousPerson,minReleaseYear,maxReleaseYear){
                     <p class="not-available">Couldn't find a movie person with that name.</p>
                     <p class="not-available">Please refine your search.</p>
                     </li>`);
-                $('.js-new-search-container').addClass('hidden');
-                $('.js-new-search-container').append(`
+                $('.js-new-search-container').html(`
                     <button type="button" class="new-search-button js-new-search">New Search</button>`);  
                 $('.js-search').fadeOut({
                         complete: function() {
-                          $('.js-results-area').removeClass("hidden").hide().fadeIn("slow");
+                          $('.js-results-area').removeClass("hidden").hide().fadeIn({});
                           $('.js-new-search-container').removeClass("hidden").hide().fadeIn("slow");
                 }});  
             } else {
@@ -466,7 +461,7 @@ function fetchIDNoGenre(famousPerson,minReleaseYear,maxReleaseYear){
         })
         .catch(err => {
             $('.js-error-message').text(`Error: ${err.message}`)
-            $('.js-new-search-container').append(`
+            $('.js-new-search-container').html(`
         <button type="button" class="new-search-button js-new-search">New Search</button>`);
         });
 }
@@ -519,6 +514,8 @@ function watchForm(){
         event.preventDefault();
         $('.js-results-area').addClass('hidden');
         $('.js-streaming-area').addClass('hidden');
+        $('.js-new-search-container').addClass('hidden');
+        $('.js-new-search-container').empty();
         $('.js-results').empty();
         $('.js-streaming').empty();
         $('.js-search').fadeOut("slow");
