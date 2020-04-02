@@ -285,8 +285,11 @@ function displayMovie(responseJson) {
         $('.js-new-search-container').addClass("hidden");
         $('.js-new-search-container').append(`
             <button type="button" class="new-search-button js-new-search">New Search</button>`);
-        $('.js-results-area').removeClass("hidden").hide().fadeIn("slow");
-        $('.js-new-search-container').removeClass("hidden").hide().fadeIn("slow");
+        $('.js-search').fadeOut({
+            complete: function() {
+              $('.js-results-area').removeClass("hidden").hide().fadeIn("slow");
+              $('.js-new-search-container').removeClass("hidden").hide().fadeIn("slow");
+            }});
     } else {
         const randomMovie = Math.floor(Math.random() * responseJson.results.length);
             if(responseJson.results[randomMovie].poster_path == null) {
@@ -301,15 +304,11 @@ function displayMovie(responseJson) {
                 $('.js-new-search-container').addClass("hidden");
                 $('.js-new-search-container').append(`
                 <button type="button" class="new-search-button js-new-search">New Search</button>`);
-                $('.js-results-area').removeClass("hidden").hide().fadeIn("slow");
-                $('.js-new-search-container').removeClass("hidden").hide().fadeIn("slow");
-                const randomMovieID = responseJson.results[randomMovie].id;
-                $('body').on("click", ".js-show-streams", event => {
-                    $('.js-streaming').empty();
-                    $('.js-overview').hide();
-                    $('.js-show-streams').hide();
-                    getStream(randomMovieID);
-                });
+                $('.js-search').fadeOut({
+                    complete: function() {
+                      $('.js-results-area').removeClass("hidden").hide().fadeIn("slow");
+                      $('.js-new-search-container').removeClass("hidden").hide().fadeIn("slow");
+                    }});
             } else {
                 const movieYear = responseJson.results[randomMovie].release_date.slice(0,4);
                 $('.js-results').append(
@@ -323,22 +322,20 @@ function displayMovie(responseJson) {
                 $('.js-new-search-container').addClass("hidden");
                 $('.js-new-search-container').append(`
                 <button type="button" class="new-search-button js-new-search">New Search</button>`);
-                $('.js-results-area').removeClass("hidden").hide().fadeIn("slow");
-                $('.js-new-search-container').removeClass("hidden").hide().fadeIn("slow");
-                const randomMovieID = responseJson.results[randomMovie].id;
-                $('body').on("click", ".js-show-streams", event => {
-                    $('.js-streaming').empty();
-                    $('.js-overview').hide();
-                    $('.js-show-streams').hide();
-                    getStream(randomMovieID);
-                });
+                $('.js-search').fadeOut({
+                    complete: function() {
+                      $('.js-results-area').removeClass("hidden").hide().fadeIn("slow");
+                      $('.js-new-search-container').removeClass("hidden").hide().fadeIn("slow");
+                    }});
             }
+            const randomMovieID = responseJson.results[randomMovie].id;
+            $('.js-streaming-area').addClass("hidden");
+            getStream(randomMovieID);
     }
 }
 
 function getStream(randomMovieID) {
     //uses tmdb ID from tmdb responseJson to fetch streaming info from Utelly API
-    $('.js-streaming').empty();
     const params = {
         source_id: randomMovieID,
         source: "tmdb",
@@ -355,7 +352,9 @@ function getStream(randomMovieID) {
             }
             throw new Error(response.statusText);
         })
-        .then(responseJson => displayStreams(responseJson))
+        .then(responseJson => {
+            displayStreams(responseJson);
+        })
         .catch(err => {
             $('.js-error-message').text(`Error: ${err.message}`);
             $('.js-new-search-container').append(`
@@ -365,7 +364,6 @@ function getStream(randomMovieID) {
 
 function displayStreams(responseJson) {
     //uses Utelly responseJson to display streaming info on page
-    $('.js-streaming').empty();
     console.log(responseJson);
     if (responseJson.collection.locations.length === 0){
         $('.js-streaming').append(
@@ -377,12 +375,11 @@ function displayStreams(responseJson) {
         for (let i = 0; i < responseJson.collection.locations.length; i++) {
             $('.js-streaming').append(
                 `<li>
-                <a target="_blank" href="${responseJson.collection.locations[i].url}"><img class="stream-service" src="${responseJson.collection.locations[i].icon}" alt="A link to ${responseJson.collection.locations[i].display_name}"></a>
+                <a target="_blank" href="${responseJson.collection.locations[i].url}"><img class="stream-service" src="${responseJson.collection.locations[i].icon}" alt="${responseJson.collection.locations[i].display_name}"></a>
                 </li>`
             );
         }
     }
-    $('.js-streaming-area').removeClass('hidden');
 }
 
 function fetchID(famousPerson,minReleaseYear,maxReleaseYear,genre){
@@ -428,8 +425,7 @@ function fetchIDNoGenre(famousPerson,minReleaseYear,maxReleaseYear){
     //uses the name provided in search form to retrieve their tmdb ID from the tmdb API when no genre is provided
     const params = {
         query: famousPerson,
-        api_key: tmdb_ApiKey
-        
+        api_key: tmdb_ApiKey 
     };
     const queryString = formatQueryParams(params);
     const url = peopleURL + '?' + queryString;
@@ -474,6 +470,18 @@ function showSearch(){
     });
 }
 
+function showStream(){
+$('body').on("click", ".js-show-streams", event => {
+    $('.js-show-streams').fadeOut();
+    $('.js-new-search-container').fadeOut({
+        complete: function() {
+            $('.js-streaming-area').removeClass('hidden').hide().fadeIn("slow");
+            $('.js-new-search-container').fadeIn("slow");
+        }}
+    );
+    });
+}
+
 function newSearch(){
     //shows search form after hitting 'new search' button
     $('body').on("click",".js-new-search", event => {
@@ -501,9 +509,7 @@ function watchForm(){
         $('.js-streaming-area').addClass('hidden');
         $('.js-results').empty();
         $('.js-streaming').empty();
-        $('.js-search').fadeOut();
-        $('.js-streaming-area').show();
-        $('.js-results-area').show();
+        $('.js-search').fadeOut("slow");
         $('.js-error-message').text('');
         const maxYear = $('.js-max-year').val();
         const minYear= $('.js-min-year').val();
@@ -563,3 +569,4 @@ function getMinReleaseYear(minYear) {
 $(watchForm);
 $(showSearch);
 $(newSearch); 
+$(showStream);
