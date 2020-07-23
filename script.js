@@ -4,10 +4,10 @@ const tmdb_ApiKey = '78b93597ae7fe6921e345ea20019e86d';
 
 const utelly_Headers = {
     method: "GET",
-	headers: {
+	headers: new Headers({
         'x-rapidapi-host': "utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com",
         'x-rapidapi-key': "9e31b2a0d6msh399b4899e1128c5p1e5fcejsn4ee14e3adc6c"
-    }
+    })
 };
 
 const discoverURL = "https://api.themoviedb.org/3/discover/movie";
@@ -336,7 +336,7 @@ function getStream(randomMovieID) {
     const params = {
         source_id: randomMovieID,
         source: "tmdb",
-        country: "US",
+        country: "us",
         api_key: '9e31b2a0d6msh399b4899e1128c5p1e5fcejsn4ee14e3adc6c'
     };
     const queryString = formatQueryParams(params);
