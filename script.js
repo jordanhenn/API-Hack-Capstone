@@ -362,7 +362,7 @@ function getStream(randomMovieID) {
 function displayStreams(responseJson) {
     //uses Utelly responseJson to display streaming info on page
     console.log(responseJson);
-    if (responseJson.collection.locations.length === 0){
+    if (responseJson.collection.locations.length === 0 || responseJson.collection.locations === undefined){
         $('.js-streaming').append(
             `<li>
             <p class="not-available">This title is not currently available for streaming.</p>
