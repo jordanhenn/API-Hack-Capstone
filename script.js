@@ -362,7 +362,7 @@ function getStream(randomMovieID) {
 function displayStreams(responseJson) {
     //uses Utelly responseJson to display streaming info on page
     console.log(responseJson);
-    if (responseJson.collection.locations.length > 0) {
+    if (responseJson.collection.locations && responseJson.collection.locations.length > 0) {
         for (let i = 0; i < responseJson.collection.locations.length; i++) {
             $('.js-streaming').append(
                 `<li>
