@@ -362,13 +362,7 @@ function getStream(randomMovieID) {
 function displayStreams(responseJson) {
     //uses Utelly responseJson to display streaming info on page
     console.log(responseJson);
-    if (responseJson.collection.locations.length === 0 || responseJson.collection.locations === undefined){
-        $('.js-streaming').append(
-            `<li>
-            <p class="not-available">This title is not currently available for streaming.</p>
-            </li>`
-        ); 
-    } else {
+    if (responseJson.collection.locations.length > 0) {
         for (let i = 0; i < responseJson.collection.locations.length; i++) {
             $('.js-streaming').append(
                 `<li>
@@ -377,6 +371,13 @@ function displayStreams(responseJson) {
             );
         }
     }
+    else {
+        $('.js-streaming').append(
+            `<li>
+            <p class="not-available">This title is not currently available for streaming.</p>
+            </li>`
+        ); 
+        }
 }
 
 function fetchID(famousPerson,minReleaseYear,maxReleaseYear,genre){
