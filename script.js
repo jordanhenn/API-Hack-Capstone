@@ -537,16 +537,16 @@ function watchForm(){
 function getMaxReleaseYear(maxYear) {
     //determines if max release year input is filled out
     //appends month and day to year
-    //checks if 2020 has been entered and adds current month and day if so
+    //checks if 2021 has been entered and adds current month and day if so
     if (maxYear == '') {
         const today = new Date();
             const dd = String(today.getDate()).padStart(2, '0');
             const mm = String(today.getMonth() + 1).padStart(2, '0');
-            const maxReleaseYear =  '2020-' + mm + '-' + dd;
+            const maxReleaseYear =  '2021-' + mm + '-' + dd;
             return maxReleaseYear;
         return maxReleaseYear;
     } else {
-        if (maxYear == 2020) {
+        if (maxYear == 2021) {
             const today = new Date();
             const dd = String(today.getDate()).padStart(2, '0');
             const mm = String(today.getMonth() + 1).padStart(2, '0');
